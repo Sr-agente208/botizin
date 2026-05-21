@@ -9,7 +9,12 @@ const { menu } = require('./SRC/menus/menu.js');
 const { menuadm } = require('./SRC/menus/menu.js');
 const { menudono } = require('./SRC/menus/menu.js');
 const { brincadeiras } = require('./SRC/menus/menu.js');
-const nescessario = JSON.parse(fsExtra.readFileSync('./SRC/settings/nescessario.json'));
+const fs = require('fs')
+const path = require('path')
+
+const caminho = path.join(__dirname, 'SRC', 'settings', 'nescessario.json')
+
+const necessario = JSON.parse(fs.readFileSync(caminho))
 const { sendVideoAsSticker2, sendImageAsSticker2 } = require('./fuction/sticker/rename2.js');
 const { sendVideoAsSticker, sendImageAsSticker } = require('./fuction/sticker/rename.js');
 const { version } = require('./package.json');
