@@ -6,7 +6,7 @@ const express = require('express')
 const app = express()
 
 app.get('/', (req, res) => {
-  res.send('BOTIZIN ONLINE ⚡')
+  res.send('BOT ONLINE ⚡')
 })
 
 app.listen(process.env.PORT || 3000)
