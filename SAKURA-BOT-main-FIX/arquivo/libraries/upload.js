@@ -1,4 +1,9 @@
-const { downloadContentFromMessage } = require('baileys');
+const {
+  useMultiFileAuthState,
+  DisconnectReason,
+  makeInMemoryStore
+} = require('@whiskeysockets/baileys')
+
 const FormData = require('form-data');
 const axios = require('axios');
 
