@@ -1,0 +1,5 @@
+pkg upgrade -y && pkg update -y && pkg install git -y && pkg install nodejs-lts -y && pkg install ffmpeg -y && pkg install nodejs -y && pkg install wget -y && pkg install tesseract -y
+
+termux-setup-storage
+cd/sdcard/sakura_bot
+sh start. sh

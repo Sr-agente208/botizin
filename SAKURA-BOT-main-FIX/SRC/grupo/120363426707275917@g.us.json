@@ -1,0 +1,46 @@
+[
+  {
+    "name": "Gorouo",
+    "welkom": false,
+    "sairGp": false,
+    "autofigu": false,
+    "antisalvargp": false,
+    "antiimg": false,
+    "antilink": false,
+    "antivideo": false,
+    "antinotas": false,
+    "antiemoji": false,
+    "antidoc": false,
+    "antictt": false,
+    "antisticker": false,
+    "antiaudio": false,
+    "antiloc": false,
+    "anticatalog": false,
+    "Odelete": false,
+    "autorepo": false,
+    "console": true,
+    "jogos": false,
+    "reacão": false,
+    "menu_audio": false,
+    "delimg": false,
+    "soadm": false,
+    "bangp": false,
+    "antipalavrao": {
+      "active": false,
+      "palavras": []
+    },
+    "wellcome": [
+      {
+        "bemvindo1": false,
+        "legendabv": "💙 𝙾𝙻𝙰 #numerodele#\n𝚂𝙴𝙹𝙰 𝙱𝙴𝙼 𝚅𝙸𝙽𝙳𝙾 [ 𝙰 ] 𝙰𝙾 𝙶𝚁𝚄𝙿𝙾\n#nomedogp#\n\n• 𝙻𝙴𝙸𝙰 𝙰𝚂 𝚁𝙴𝙶𝚁𝙰𝚂 𝙴 𝙰𝙿𝚁𝙾𝚅𝙴𝙸𝚃𝙴 𝙾 𝙶𝚁𝚄𝙿𝙾",
+        "legendasaiu1": false,
+        "legendasaiu": 0
+      },
+      {
+        "bemvindo2": false,
+        "legendabv": "💙 𝙾𝙻𝙰 #numerodele#\n𝚂𝙴𝙹𝙰 𝙱𝙴𝙼 𝚅𝙸𝙽𝙳𝙾 [ 𝙰 ] 𝙰𝙾 𝙶𝚁𝚄𝙿𝙾\n#nomedogp#\n\n• 𝙻𝙴𝙸𝙰 𝙰𝚂 𝚁𝙴𝙶𝚁𝙰𝚂 𝙴 𝙰𝙿𝚁𝙾𝚅𝙴𝙸𝚃𝙴 𝙾 𝙶𝚁𝚄𝙿𝙾",
+        "legendasaiu": 0
+      }
+    ]
+  }
+]

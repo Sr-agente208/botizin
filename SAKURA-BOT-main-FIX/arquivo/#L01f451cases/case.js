@@ -1,0 +1,239 @@
+//✪════〔 🎴 RESP-CONSOLE 🎴 〕════✪//
+if(isConsole) {
+if (isCmd && isGroup) {
+console.log(chalk.black(`
+┌──────────────────────────────┐
+│ 🐾 E aí, pessoal do grupo!   │
+├──────────────────────────────┤
+│ 🕒 Hora: ${colors.black(hora)}
+│ 👤 Usuário: ${colors.black(pushname)}
+│ 💬 Comando: ${colors.black(prefix + command)}
+│ 👥 Grupo: ${colors.black(groupName)}
+└──────────────────────────────┘
+`)); }
+
+if (isCmd && !isGroup) {
+console.log(chalk.black(`
+┌──────────────────────────────┐
+│ 🌸 Olá, meu docinho!         │
+├──────────────────────────────┤
+│ 🕒 Hora: ${colors.black(hora)}
+│ 👤 Usuário: ${colors.black(pushname)}
+│ 💬 Comando: ${colors.black(prefix + command)}
+└──────────────────────────────┘
+`)); }}
+
+//✨🌸✨ 〔 Função Boas-Vindas 〕 ✨🌸✨//
+sock.ev.on("group-participants.update", async (anu) => {
+try {
+
+const groupId = anu.id;
+const dirGroup = `./SRC/grupo/${groupId}.json`;
+
+if (!fs.existsSync(dirGroup)) return;
+
+const dataGp = JSON.parse(fs.readFileSync(dirGroup));
+
+for (let participant of anu.participants) {
+
+const id = typeof participant === 'string' ? participant : participant.id;
+const username = id.split("@")[0];
+
+let profilePic;
+try {
+profilePic = await sock.profilePictureUrl(id, "image");
+} catch {
+profilePic = "https://i.ibb.co/bcNGqkh/img-1773403772535.jpg";
+}
+
+if (anu.action === "add" && dataGp[0].welkom) {
+await sock.sendMessage(groupId, {
+image: { url: profilePic },
+caption: `👋 Olá @${username}, seja bem-vindo(a)!`,
+mentions: [id]
+});
+}
+
+if (anu.action === "remove" && dataGp[0].sairGp) {
+await sock.sendMessage(groupId, {
+image: { url: profilePic },
+caption: `😢 @${username} saiu do grupo.`,
+mentions: [id]
+});
+}
+
+}
+
+} catch (err) {
+console.error("Erro no welcome:", err);
+}
+});
+
+//✨😈✨ 〔 Função Boas-Vindas 〕 ✨😈✨//
+sock.ev.on("group-participants.update", async (anu) => {
+  try {
+
+const groupId = anu.id
+const dirGroup = `./SRC/grupo/${groupId}.json`
+if (!fs.existsSync(dirGroup)) return
+
+const dataGp = JSON.parse(fs.readFileSync(dirGroup))
+const mdata = await sock.groupMetadata(groupId)
+
+const groupDesc = mdata.desc || "Sem descrição"
+const time = new Date().toLocaleTimeString('pt-BR', {hour:'2-digit', minute:'2-digit'})
+
+for (let participant of anu.participants) {
+const id = typeof participant === 'string' ? participant : participant.id;
+
+let profile
+  try {
+profile = await sock.profilePictureUrl(id, "image")
+  } catch {
+profile = "https://i.ibb.co/bcNGqkh/img-1773403772535.jpg" }
+
+let texto = null
+if (dataGp[0]?.wellcome?.[0]?.bemvindo1) {
+texto = dataGp[0].wellcome[0].legendabv
+  } else if (dataGp[0]?.wellcome?.[1]?.bemvindo2) {
+texto = dataGp[0].wellcome[1].legendabv }
+
+if (!texto) continue
+
+texto = texto
+.replace(/#hora#/g, time)
+.replace(/#nomedogp#/g, mdata.subject)
+.replace(/#nomebot#/g, sock.user.id.split(':')[0])
+.replace(/#prefixo#/g, prefix)
+.replace(/#descrição#/g, groupDesc)
+
+if (anu.action === "add") {
+await sock.sendMessage(groupId,{
+image:{url:profile},
+caption:texto,
+mentions:[id] }) }}
+  } catch(e){
+console.log(e) }})
+
+//✪════〔 🧊 APAGA IMAGEM 🧊 〕════✪//
+if(isDeLimg && !isGroupAdmins && isBotGroupAdmins && type == 'imageMessage') {
+if(IS_DELETE) {
+setTimeout(async() => {
+await sock.sendMessage(from, { delete: { remoteJid: from, fromMe: false, id: info.key.id, participant: sender}});
+  }, 1000); }}
+
+exports.menu = (prefix, isCargo, nomeBot, hora, sender, pushname) => {
+return `
+╭❈֟━❄️━֟✧⊰❖⊱❆✧━֟━❄️━֟❈╮
+╠━━ׁ۫━፝֟━̷━𑁁━❄️━𑁁━፝֟━̷━ׁ۫━━╮
+┃❆𝆺𝅥˚ —̳͟͞͞ ❄️ 𝙽𝙾𝙼𝙴: ${nomeBot}
+┃❆𝆺𝅥˚ —̳͟͞͞ ❄️ 𝚄𝚂𝙴𝚁: ${pushname}
+┃❆𝆺𝅥˚ —̳͟͞͞ ❄️ 𝙿𝚁𝙴𝙵𝙸𝚇𝙾: [ ${prefix} ]
+┃❆𝆺𝅥˚ —̳͟͞͞ ❄️ 𝙷𝙾𝚁𝙰: ${hora}
+┃❆𝆺𝅥˚ —̳͟͞͞ ❄️ 𝙲𝙰𝚁𝙶𝙾: ${isCargo}
+╠━━ׁ۫━፝֟━̷━𑁁━❄️━𑁁━፝֟━̷━ׁ۫━━╯
+╰❈֟━❄️━֟✧⊰❖⊱❆✧━֟━❄️━֟❈╯
+┃
+┃ ❄️ 𝙼𝙴𝙽𝚄 𝙿𝚁𝙸𝙽𝙲𝙸𝙿𝙰𝙻
+┃ ├➤ ${prefix}menu
+┃ ├➤ ${prefix}ping
+┃ ├➤ ${prefix}info
+┃ └➤ ${prefix}owner
+┃
+┃ ❄️ 𝙲𝙾𝙼𝙰𝙽𝙳𝙾𝚂 𝙳𝙴 𝙶𝚁𝚄𝙿𝙾
+┃ ├➤ ${prefix}kick
+┃ ├➤ ${prefix}promote
+┃ ├➤ ${prefix}demote
+┃ └➤ ${prefix}linkgp
+┃
+┃ ❄️ 𝙰𝙳𝙼𝙸𝙽𝙸𝚂𝚃𝚁𝙰𝙲̧𝙰̃𝙾
+┃ ├➤ ${prefix}ban
+┃ ├➤ ${prefix}unban
+┃ ├➤ ${prefix}mute
+┃ └➤ ${prefix}unmute
+┃
+┃ ❄️ 𝙳𝙸𝚅𝙴𝚁𝚂𝙾̃𝙴𝚂
+┃ ├➤ ${prefix}jogo
+┃ ├➤ ${prefix}quiz
+┃ ├➤ ${prefix}piada
+┃ └➤ ${prefix}meme
+┃
+┃ ❄️ 𝙵𝙴𝚁𝚁𝙰𝙼𝙴𝙽𝚃𝙰𝚂
+┃ ├➤ ${prefix}sticker
+┃ ├➤ ${prefix}toimg
+┃ ├➤ ${prefix}tts
+┃ |➥ ${prefix}traduzir
+┃
+╰❈֟━❄️━֟✧⊰❖⊱❆✧━֟━❄️━֟❈╯`
+}
+
+//✧══════〔 🤺 𝙱𝙾𝙰𝚂 𝚅𝙸𝙽𝙳𝙰𝚂 🤺 〕══════✧
+sock.ev.on("group-participants.update", async (anu) => {
+  try {
+const groupId = anu.id;
+const dirGroup = `./SRC/grupo/${groupId}.json`;
+if (!fs.existsSync(dirGroup)) return;
+const dataGp = JSON.parse(fs.readFileSync(dirGroup));
+const mdata = await sock.groupMetadata(groupId);
+
+const jid = anu.participants[0].id || anu.participants[0]
+
+const groupDesc = mdata.desc || "Sem descrição";
+const time = new Date().toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+for (let participant of anu.participants) {
+const id = typeof participant === 'string' ? participant : participant.id;
+let profileUrl = "https://i.ibb.co/rRWpNcgs/img-1773626821798.jpg";
+  try {
+const url = await sock.profilePictureUrl(id, "image");
+if (url) profileUrl = url;
+ } catch {}
+let texto = null;
+
+//🎴 FUNÇÃO ENTRAR
+if (anu.action === "add") {
+const welcomeObj = dataGp[0]?.wellcome?.find(w => w.bemvindo1 || w.bemvindo2);
+texto = welcomeObj?.legendabv;
+
+//🎴 FUNÇÃO SAIR 
+} else if (anu.action === "remove") {
+const exitObj = dataGp[0]?.wellcome?.find(w => w.legendasaiu1);
+texto = exitObj?.legendasaiu; }
+
+if (!texto) continue; 
+texto = String(texto || "")
+texto = texto.replace(/#hora#/g, time)
+.replace(/#nomedogp#/g, mdata.subject)
+.replace(/#numerodele#/g, '@' + jid.split('@')[0])
+.replace(/#nomebot#/g, sock.user.id.split(':')[0])
+.replace(/#prefixo#/g, prefix)
+.replace(/#descrição#/g, groupDesc);
+
+await sock.sendMessage(groupId, {
+image: { url: profileUrl },
+caption: texto,
+mentions: [id], }); }
+  } catch (e) {
+console.log(e); }});
+
+if(isCmd) {
+reagir(from, "❓");
+const totalSeconds = process.uptime();
+const hours = Math.floor(totalSeconds / 3600);
+const minutes = Math.floor((totalSeconds % 3600) / 60);
+const seconds = Math.floor(totalSeconds % 60);
+sock.sendMessage(from, {
+text: `
+»»»»»»»»»»»»»»»»»
+➡️  COMANDO INVÁLIDO  ⬅️
+- - - - - - - - - - -
+👤 Usuário: @${pushname}
+📌 Comando: "${prefix+command}" errado‼️
+💡 Use: ${prefix}menu
+🥶 Olá: ${tempo}
+⏱️ Uptime: ${hours}h ${minutes}m ${seconds}s
+»»»»»»»»»»»»»»»»»
+`,
+ }, { quoted: selo }); }
+
+}
+});
