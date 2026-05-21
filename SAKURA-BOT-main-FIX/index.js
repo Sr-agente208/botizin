@@ -2,6 +2,15 @@
 //👑 Base criada e desenvolvida 100% por mim (@boladinho). Código original, feito na raça, com sistema otimizado e comandos exclusivos. Se for usar, mantém os créditos e respeita o trampo! ♨️👨‍💻🔥 Não vender essa base fdp
 //｡☆✼★━━━━━━ATENÇÃO━━━━━━━━━━★✼☆｡
 ////////////////////////////////////////////////////////
+const express = require('express')
+const app = express()
+
+app.get('/', (req, res) => {
+  res.send('BOTIZIN ONLINE ⚡')
+})
+
+app.listen(process.env.PORT || 3000)
+
 const {
 default: makeWASocket,
 DisconnectReason,
